@@ -3,6 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,node,react,reactnative,serverless
 
 logs/
+test/
 
 lambda_dist_pkg/
 lambda_function.zip
