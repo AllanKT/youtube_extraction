@@ -12,11 +12,12 @@ configs = {
     'process': {
         'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
         'FEED_FORMAT': 'json',
-        'FEED_URI': 'data.json'
+        'FEED_URI': 'dags/data_youtube.json'
     },
     'url': 'https://www.youtube.com/results?search_query=ish+tecnologia&sp=EgQIBRAB',
     'youtube_watch': 'https://www.youtube.com/watch?v=',
-    'interval': '*/5 * * * *',
+    'interval': '@daily',
+    # 'interval': '*/5 * * * *',
     'default_args': {
         'owner': 'airflow',
         'dependes_on_past': False,
@@ -62,13 +63,13 @@ with DAG(
     catchup=False,
 ) as dag:
 
+    start = DummyOperator(task_id='start', dag=dag)
     t2=PythonOperator(
         task_id='python_script',
         python_callable=run,
         dag=dag
     )
-    start = DummyOperator(task_id='start', dag=dag)
     end = DummyOperator(task_id='end', dag=dag)
 
-t2 >> start
-start >> end
+start >> t2
+t2 >> end
