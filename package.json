@@ -1,0 +1,31 @@
+{
+  "name": "commit",
+  "version": "1.4.1",
+  "main": "index.js",
+  "author": "Truly Systems",
+  "license": "MIT",
+  "scripts": {
+    "cmt": "git add . && git cz",
+    "log": "standard-version",
+    "merge": "standard-version && git request-pull sandbox origin",
+    "cmt-log": "git cz && standard-version"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "3.2.0",
+    "husky": "^4.2.5",
+    "standard-version": "^8.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
