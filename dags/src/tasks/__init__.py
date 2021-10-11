@@ -1,0 +1,1 @@
+from src.tasks.scrap import scrap
